@@ -1,0 +1,10 @@
+<h1>Edit Client</h1>
+
+<form action="/clients/<%= client.id %>?_method=PUT" method="POST">
+    <div><input type="text" name="client[firstName]" placeholder="First name" value="<%= client.firstName %>"></div>
+    <div><input type="text" name="client[lastName]" placeholder="Last name" value="<%= client.lastName %>"></div>
+    <div><input type="text" name="client[phone]" placeholder="Phone number" value="<%= client.phone %>"></div>
+    <div><input type="text" name="client[address]" placeholder="Address" value="<%= client.address %>"></div>
+
+    <input type="submit" value="Send">
+</form>
