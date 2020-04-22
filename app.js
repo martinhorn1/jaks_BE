@@ -8,14 +8,15 @@ const mongoose = require("mongoose");
 const methodOverride = require("method-override");
 
 // Require routes
-const indexRouter = require('./routes/index');
+const userRouter = require('./routes/user');
 const clientsRouter = require('./routes/clients');
 const calendarsRouter = require('./routes/calendars');
+
 
 const app = express();
 
 // Connect database
-mongoose.connect("mongodb://localhost:27017/jaks", { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect("mongodb://localhost:27017/jaks", { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex:true });
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function () {
@@ -34,7 +35,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(methodOverride("_method"));
 
 // Mount routes
-app.use('/', indexRouter);
+app.use('/user', userRouter);
 app.use('/clients', clientsRouter);
 app.use('/calendar', calendarsRouter);
 
