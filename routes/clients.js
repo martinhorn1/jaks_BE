@@ -3,22 +3,16 @@ const router = express.Router();
 const { asyncErrorHandler } = require("../middleware");
 const {
     clientIndex,
-    clientNew,
     clientCreate,
     clientShow,
     clientEdit,
     clientUpdate,
     clientDelete,
-
-    clientAddFolder,
-    clientAddData
+    dataCreate
 } = require("../controllers/clients");
 
 /* GET clients index /clients */
 router.get('/', asyncErrorHandler(clientIndex));
-
-/* GET clients new index /clients/new */
-router.get('/new', clientNew);
 
 /* POST clients create /clients */
 router.post('/', asyncErrorHandler(clientCreate));
@@ -36,10 +30,7 @@ router.put('/:id', asyncErrorHandler(clientUpdate));
 router.delete('/:id', asyncErrorHandler(clientDelete));
 
 
-/* GET clients add data page /clients/:id/adddata */
-router.get('/:id/adddata', asyncErrorHandler(clientAddData));
-
-/* UPDATE clients add folder /clients/:id */
-router.put('/:id', asyncErrorHandler(clientAddFolder));
+/* CREATE data /clients/:id */
+router.post('/:id', asyncErrorHandler(dataCreate));
 
 module.exports = router;

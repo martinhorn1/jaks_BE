@@ -1,50 +1,46 @@
 const Client = require("../models/client");
+const Data = require("../models/data");
 
 module.exports = {
     // Clients Index Page
     async clientIndex(req, res, next) {
         let clients = await Client.find({});
-        res.render("clients/index", { clients });
-    },
-    // Clients New Page
-    clientNew(req, res, next) {
-        res.render("clients/new");
+        res.send(clients);
     },
     // Clients Create
     async clientCreate(req, res, next) {
-        let client = await Client.create(req.body.client);
-        res.redirect(`/clients/${client.id}`);
+        let client = new Client(req.body);
+        client.save();
+        res.send(client);
     },
     // Clients Show Page
     async clientShow(req, res, next) {
         let client = await Client.findById(req.params.id);
-        res.render("clients/show", { client });
+        res.send(client);
     },
     // Clients Edit Page
     async clientEdit(req, res, next) {
         let client = await Client.findById(req.params.id);
-        res.render("clients/edit", { client });
+        res.send(client);
     },
     // Clients Update
     async clientUpdate(req, res, next) {
-        let client = await Client.findByIdAndUpdate(req.params.id, req.body.client);
-        res.redirect(`/clients/${client.id}`);
+        let client = await Client.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        await client.save();
+        res.send(client);
     },
     // Clients Delete
     async clientDelete(req, res, next) {
         let client = await Client.findByIdAndRemove(req.params.id);
-        res.redirect("/clients");
+        res.send("Deleted client");
     },
 
-
-    // Clients Add Data Page
-    async clientAddData(req, res, next) {
-        let client = await Client.findById(req.params.id);
-        res.render("clients/adddata", { client });
-    },
     // Clients Create Data
-    async clientAddFolder(req, res, next) {
-        let client = await Client.data.push({ data: req.body.client });
-        res.send(`/clients/${client.id}`);
+    async dataCreate(req, res, next) {
+        let client = await Client.findById(req.params.id);
+        let data = await new Data(req.body);
+        client.data.push(data);
+        client.save();
+        res.send(client);
     },
 }
