@@ -1,14 +1,19 @@
 const Client = require("../models/client");
+const User = require('../models/User');
 const Data = require("../models/data");
 
 module.exports = {
     // Clients Index Page
     async clientIndex(req, res, next) {
+        const user = User;
+        const { _id } = user;
         let clients = await Client.find({});
-        res.send(clients);
+        res.send({clients, _id});
     },
     // Clients Create
     async clientCreate(req, res, next) {
+        const user = User;
+        const { _id } = user;
         let client = new Client(req.body);
         client.save();
         res.send(client);

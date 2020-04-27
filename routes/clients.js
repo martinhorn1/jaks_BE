@@ -1,4 +1,5 @@
 const express = require('express');
+const auth = require('../middleware/auth')
 const router = express.Router();
 const { asyncErrorHandler } = require("../middleware");
 const {
@@ -12,10 +13,10 @@ const {
 } = require("../controllers/clients");
 
 /* GET clients index /clients */
-router.get('/', asyncErrorHandler(clientIndex));
+router.get('/', auth,  asyncErrorHandler(clientIndex));
 
 /* POST clients create /clients */
-router.post('/', asyncErrorHandler(clientCreate));
+router.post('/', auth,  asyncErrorHandler(clientCreate));
 
 /* GET clients show /clients/:id */
 router.get('/:id', asyncErrorHandler(clientShow));

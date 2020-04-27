@@ -7,8 +7,8 @@ const router = express.Router()
 router.post('/register', async (req, res) => {
     // Create a new user
     try {
-        const user = new User(req.body)
-        await user.save()
+        const user = new User(req.body);
+        await user.save();
         //const token = await user.generateAuthToken();
         res.status(201).send({ user })
     } catch (error) {
@@ -24,8 +24,9 @@ router.post('/login', async(req, res) => {
         if (!user) {
             return res.status(401).send({error: 'Login failed! Check authentication credentials'})
         }
-        const token = await user.generateAuthToken()
-        res.send({ token })
+        const token = await user.generateAuthToken();
+        const { _id } = user;
+        res.send({ token, _id })
     } catch (error) {
         res.status(400).send(error)
     }
