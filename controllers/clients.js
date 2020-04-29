@@ -6,18 +6,18 @@ const mongoose = require("mongoose");
 module.exports = {
     // Clients Index Page
     async clientIndex(req, res, next) {
-        const user = User;
+        const user = req.user._id;
         const { _id } = user;
-        // let clients = await User.find({});
-        let clients2 = await Client.find({});
-        res.send(clients2);
+        let clients = await Client.find({lawyerid: _id});
+        res.send(clients);
     },
     // Clients Create
     async clientCreate(req, res, next) {
         const user = req.user._id;
         const { _id } = user;
         let client = new Client(req.body);
-        let lawyer = await User.findByIdAndUpdate({ _id }, { $push: { clients: client, lawyer: _id } });
+        client.set({ lawyerid: _id });
+        let lawyer = await User.findByIdAndUpdate({ _id }, { $push: { clients: client } });
         client.save();
         lawyer.save();
         res.send({client, _id});

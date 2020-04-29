@@ -14,10 +14,7 @@ const ClientSchema = new Schema({
             default: []
         }
     },
-    lawyer: {
-        type: Schema.Types.ObjectId,
-        ref: 'User'
-    },
+    lawyerid: Schema.Types.ObjectId
     // date: {
     //     type: Date,
     //     default: Date.now
