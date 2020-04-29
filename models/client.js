@@ -13,8 +13,11 @@ const ClientSchema = new Schema({
             type: Array,
             default: []
         }
-    }
-        
+    },
+    lawyer: {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+    },
     // date: {
     //     type: Date,
     //     default: Date.now

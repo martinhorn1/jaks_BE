@@ -27,10 +27,12 @@ const userSchema = new Schema({
         }
     },
     phone: String,
-    clients: {
-        type: Schema.Types.ObjectId,
-        ref: "Client"
-    },
+    clients: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: "Client"
+        }
+    ],
     calendar: {
         type: Schema.Types.ObjectId,
         ref: "Calendar"

@@ -1,22 +1,26 @@
 const Client = require("../models/client");
 const User = require('../models/User');
 const Data = require("../models/data");
+const mongoose = require("mongoose");
 
 module.exports = {
     // Clients Index Page
     async clientIndex(req, res, next) {
         const user = User;
         const { _id } = user;
-        let clients = await Client.find({});
-        res.send({clients, _id});
+        // let clients = await User.find({});
+        let clients2 = await Client.find({});
+        res.send(clients2);
     },
     // Clients Create
     async clientCreate(req, res, next) {
-        const user = User;
+        const user = req.user._id;
         const { _id } = user;
         let client = new Client(req.body);
+        let lawyer = await User.findByIdAndUpdate({ _id }, { $push: { clients: client, lawyer: _id } });
         client.save();
-        res.send(client);
+        lawyer.save();
+        res.send({client, _id});
     },
     // Clients Show Page
     async clientShow(req, res, next) {
