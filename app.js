@@ -10,6 +10,7 @@ const methodOverride = require("method-override");
 
 // Require routes
 const userRouter = require('./routes/user');
+const clientRouter = require('./routes/client');
 const clientsRouter = require('./routes/clients');
 const calendarsRouter = require('./routes/calendars');
 
@@ -38,6 +39,7 @@ app.use(methodOverride("_method"));
 
 // Mount routes
 app.use('/user', userRouter);
+app.use('/client', clientRouter);
 app.use('/clients', clientsRouter);
 app.use('/calendar', calendarsRouter);
 
