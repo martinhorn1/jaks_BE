@@ -5,6 +5,7 @@ const ClientSchema = new Schema({
     firstName: String,
     lastName: String,
     phone: Number,
+    company: String,
     address: String,
     data: {
         type: Array,

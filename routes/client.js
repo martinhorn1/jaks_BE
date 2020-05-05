@@ -8,7 +8,7 @@ const {
     clientEdit,
     clientUpdate,
     clientDelete,
-    dataCreate
+    dataCreate,
 } = require("../controllers/client");
 
 /* POST clients create /clients */
