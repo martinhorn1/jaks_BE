@@ -6,13 +6,12 @@ module.exports = {
         try {
             const user = new User(req.body);
             await user.save();
-            //const token = await user.generateAuthToken();
             res.status(201).send({ user })
         } catch (error) {
             res.status(400).send(error)
         }
     },
-    // Login a registered user
+    // Login a registered user and generate token
     async userLogin(req, res, next) {
         try {
             const { email, password } = req.body;

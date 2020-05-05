@@ -53,38 +53,38 @@ const userSchema = new Schema({
             required: true
         }
     }]
-})
+});
 
 userSchema.pre('save', async function (next) {
     // Hash the password before saving the user model
-    const user = this
+    const user = this;
     if (user.isModified('password')) {
         user.password = await bcrypt.hash(user.password, 8)
     }
     next()
-})
+});
 userSchema.methods.generateAuthToken = async function() {
     // Generate an auth token for the user
-    const user = this
+    const user = this;
     const { _id, firstName, lastName, email } = user;
-    const token = jwt.sign({_id, firstName, lastName, email}, process.env.JWT_KEY)
-    user.tokens = user.tokens.concat({token})
-    await user.save()
+    const token = jwt.sign({_id, firstName, lastName, email}, process.env.JWT_KEY);
+    user.tokens = user.tokens.concat({token});
+    await user.save();
     return token
-}
+};
 
 userSchema.statics.findByCredentials = async (email, password) => {
-    const user = await User.findOne({email} )
+    const user = await User.findOne({email} );
     if (!user) {
         throw new Error({ error: 'Invalid login credentials'})
     }
-    const isPasswordMatch = await bcrypt.compare(password, user.password)
+    const isPasswordMatch = await bcrypt.compare(password, user.password);
     if (!isPasswordMatch) {
         throw new Error({ error: 'Invalid login credentials' })
     }
 
     return user
-}
-const User = mongoose.model('User', userSchema)
+};
+const User = mongoose.model('User', userSchema);
 
-module.exports = User
+module.exports = User;
