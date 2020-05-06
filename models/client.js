@@ -2,9 +2,20 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const ClientSchema = new Schema({
-
-    firstName: String,
-    lastName: String,
+    name: String,
+    email: {
+        type: String,
+        index: true,
+        unique: true,
+        trim: true
+    },
+    idCode: {
+        type: Number,
+        index: true,
+        unique: true,
+        trim: true
+    },
+    isCompany: Boolean,
     phone: Number,
     company: String,
     address: String,
