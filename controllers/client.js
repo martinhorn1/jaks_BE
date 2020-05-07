@@ -1,7 +1,6 @@
 const Client = require("../models/client");
 const User = require('../models/User');
 const Data = require("../models/data");
-const mongoose = require("mongoose");
 
 module.exports = {
     // Clients Create
@@ -44,5 +43,14 @@ module.exports = {
         client.data.push(data);
         client.save();
         res.send(client);
+    },
+    // Clients Show Data Page
+    async dataShow(req, res, next) {
+        let client = await Client.findById(req.params.id);
+        for (var i = 0; i < client.data.length; i++) {
+            if (client.data[i]._id == req.params.dataid) {
+                res.send(client.data[i]);
+            }
+        }
     },
 }

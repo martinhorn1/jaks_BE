@@ -1,7 +1,4 @@
 const Client = require("../models/client");
-const User = require('../models/User');
-const Data = require("../models/data");
-const mongoose = require("mongoose");
 
 module.exports = {
     // Clients Index Page
