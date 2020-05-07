@@ -1,19 +1,23 @@
 const mongoose = require("mongoose");
+const validator = require("validator");
 const Schema = mongoose.Schema;
 
 const ClientSchema = new Schema({
     name: String,
     email: {
         type: String,
-        index: true,
-        unique: true,
-        trim: true
+        lowercase: true,
+        validate: value => {
+            if (!validator.isEmail(value)) {
+                throw new Error({error: 'Invalid Email address'})
+            }
+        }
     },
     idCode: {
         type: Number,
         index: true,
-        unique: true,
-        trim: true
+        required: true,
+        unique: true
     },
     isCompany: Boolean,
     phone: Number,
