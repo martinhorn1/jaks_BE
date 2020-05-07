@@ -12,5 +12,5 @@ jobs:
       uses: SamKirkland/FTP-Deploy-Action@3.1.0
       with:
         ftp-server: sftp://193.40.32.4/home/martsipan/jakstest
-        ftp-username: ${{ secrets.REMOTE_USER }}
+        ftp-username: martsipan
         ftp-password: ${{ secrets.REMOTE_PASSWORD }}
