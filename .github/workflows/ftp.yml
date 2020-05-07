@@ -1,5 +1,5 @@
 on: push
-name: Publish Website over SFTP
+name: BE deployment over SFTP
 jobs:
   FTP-Deploy-Action:
     name: FTP-Deploy-Action
