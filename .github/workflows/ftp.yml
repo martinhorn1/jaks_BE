@@ -1,5 +1,5 @@
 on: push
-name: Publish Website over SFTP
+name: BE deployment over SFTP
 jobs:
   FTP-Deploy-Action:
     name: FTP-Deploy-Action
@@ -15,4 +15,3 @@ jobs:
         ftp-server: sftp://${{ secrets.REMOTE_HOST }}/home/${{ secrets.REMOTE_USER }}/jaksBE
         ftp-username: ${{ secrets.REMOTE_USER }}
         ftp-password: ${{ secrets.REMOTE_PASSWORD }}
-        git-ftp-args: --insecure # if your certificate is setup correctly this can be removed (see known-hosts argument)
