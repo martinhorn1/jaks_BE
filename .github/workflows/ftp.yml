@@ -1,5 +1,5 @@
 on: push
-name: Publish Website
+name: Publish Website over SFTP
 jobs:
   FTP-Deploy-Action:
     name: FTP-Deploy-Action
@@ -8,9 +8,11 @@ jobs:
     - uses: actions/checkout@v2.1.0
       with:
         fetch-depth: 2
+
     - name: FTP-Deploy-Action
       uses: SamKirkland/FTP-Deploy-Action@3.1.0
       with:
-        ftp-server: sftp://193.40.32.4:22/home/martsipan/jakstest
-        ftp-username: martsipan
+        ftp-server: sftp://{{ secrets.REMOTE_HOST }}:22/home/{{ secrets.REMOTE_USER }}/jakstest
+        ftp-username: ${{ secrets.REMOTE_USER }}
         ftp-password: ${{ secrets.REMOTE_PASSWORD }}
+        git-ftp-args: --insecure # if your certificate is setup correctly this can be removed (see known-hosts argument)
