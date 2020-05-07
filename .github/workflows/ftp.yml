@@ -11,6 +11,6 @@ jobs:
     - name: FTP-Deploy-Action
       uses: SamKirkland/FTP-Deploy-Action@3.1.0
       with:
-        ftp-server: sftp://${{ secrets.REMOTE_HOST }}/home/${{ secrets.REMOTE_USER }}/jakstest
+        ftp-server: sftp://${{ secrets.REMOTE_HOST }}:22/home/${{ secrets.REMOTE_USER }}/jakstest
         ftp-username: ${{ secrets.REMOTE_USER }}
         ftp-password: ${{ secrets.REMOTE_PASSWORD }}
