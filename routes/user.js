@@ -13,7 +13,7 @@ const {
 router.get('/', async (req, res, next) => {
     const users = await User.find({});
     res.send(users);
-})
+});
 
 /* POST users register /user/register */
 router.post('/register', asyncErrorHandler(userRegister));

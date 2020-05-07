@@ -20,8 +20,7 @@ module.exports = {
                 return res.status(401).send({ error: 'Login failed! Check authentication credentials' })
             }
             const token = await user.generateAuthToken();
-            const { _id } = user;
-            res.send({ token, _id })
+            res.send({ token })
         } catch (error) {
             res.status(400).send(error)
         }
